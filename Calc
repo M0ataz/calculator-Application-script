@@ -1,0 +1,90 @@
+import math
+
+history = []
+
+def add(a, b):
+    return a + b
+
+def subtract(a, b):
+    return a - b
+
+def multiply(a, b):
+    return a * b
+
+def divide(a, b):
+    if b == 0:
+        raise ValueError("Cannot divide by zero")
+    return a / b
+
+def power(a, b):
+    return a ** b
+
+def square_root(a):
+    if a < 0:
+        raise ValueError("Cannot calculate square root of a negative number")
+    return math.sqrt(a)
+
+def show_menu():
+    print("""
+Advanced Calculator
+-------------------
+1. Add
+2. Subtract
+3. Multiply
+4. Divide
+5. Power
+6. Square Root
+7. Show History
+8. Exit
+""")
+
+while True:
+    show_menu()
+    choice = input("Choose an option (1-8): ")
+
+    try:
+        if choice == "8":
+            print("Goodbye.")
+            break
+
+        if choice == "7":
+            if not history:
+                print("No history available.")
+            else:
+                for item in history:
+                    print(item)
+            continue
+
+        if choice == "6":
+            num = float(input("Enter a number: "))
+            result = square_root(num)
+            expression = f"√{num} = {result}"
+
+        else:
+            a = float(input("Enter first number: "))
+            b = float(input("Enter second number: "))
+
+            if choice == "1":
+                result = add(a, b)
+                expression = f"{a} + {b} = {result}"
+            elif choice == "2":
+                result = subtract(a, b)
+                expression = f"{a} - {b} = {result}"
+            elif choice == "3":
+                result = multiply(a, b)
+                expression = f"{a} × {b} = {result}"
+            elif choice == "4":
+                result = divide(a, b)
+                expression = f"{a} ÷ {b} = {result}"
+            elif choice == "5":
+                result = power(a, b)
+                expression = f"{a} ^ {b} = {result}"
+            else:
+                print("Invalid option.")
+                continue
+
+        history.append(expression)
+        print("Result:", result)
+
+    except ValueError as e:
+        print("Error:", e)
